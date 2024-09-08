@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class UserService {
@@ -21,6 +23,10 @@ public class UserService {
                 .role(Role.valueOf(role))
                 .build());
         return "User saved successfully";
+    }
+
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
     }
 
     public String updateUser(Long id, String username, String password, String email, String role) {

@@ -117,13 +117,16 @@ public class ReportService {
     /////////////// Convert Report to DTO  ///////////////
     private ReportResponseDTO convertToDTO(Report report) {
         return ReportResponseDTO.builder()
+                .id(report.getId())
                 .fileNumber(report.getFileNumber())
                 .diagnosisTitle(report.getDiagnosisTitle())
                 .diagnosisDetails(report.getDiagnosisDetails())
                 .reportDate(report.getReportDate())
                 .reportImageBase64(Base64.getEncoder().encodeToString(report.getReportImage()))
+                .labTechnicianId(report.getLabTechnician().getId())
                 .labTechnicianName(report.getLabTechnician().getFirstName())
                 .labTechnicianSurname(report.getLabTechnician().getLastName())
+                .patientId(report.getPatient().getId())
                 .patientName(report.getPatient().getFirstName())
                 .patientSurname(report.getPatient().getLastName())
                 .build();

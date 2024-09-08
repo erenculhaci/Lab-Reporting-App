@@ -1,0 +1,29 @@
+/* src/pages/HomePage.css */
+.home-page {
+  padding-top: 4rem;
+  text-align: center;
+}
+
+.home-page h1 {
+  margin-bottom: 2rem;
+}
+
+.home-page nav ul {
+  list-style: none;
+  padding: 0;
+}
+
+.home-page nav ul li {
+  display: inline;
+  margin: 0 1rem;
+}
+
+.home-page nav ul li a {
+  text-decoration: none;
+  color: #007bff;
+  font-size: 1.1rem;
+}
+
+.home-page nav ul li a:hover {
+  text-decoration: underline;
+}

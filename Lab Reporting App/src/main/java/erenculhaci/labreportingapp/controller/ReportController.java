@@ -1,5 +1,6 @@
 package erenculhaci.labreportingapp.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import erenculhaci.labreportingapp.dto.ReportDTO;
 import erenculhaci.labreportingapp.dto.ReportResponseDTO;
 import erenculhaci.labreportingapp.service.*;
@@ -18,9 +19,17 @@ public class ReportController {
     private final ReportService reportService;
 
     @PostMapping("/createReport")
-    public ResponseEntity<String> createReport(@RequestPart ReportDTO reportDTO, @RequestPart MultipartFile photo) {
-        return new ResponseEntity<>(reportService.saveReport(reportDTO, photo), HttpStatus.CREATED);
+    public ResponseEntity<String> createReport(@RequestPart("reportDTO") String reportDTOString,
+                                               @RequestPart("photo") MultipartFile photo) {
+
+        try {
+            ReportDTO reportDTO = new ObjectMapper().readValue(reportDTOString, ReportDTO.class);
+            return new ResponseEntity<>(reportService.saveReport(reportDTO, photo), HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Error: " + e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
     }
+
 
     @GetMapping("/admin/getAllReports")
     public ResponseEntity<List<ReportResponseDTO>> getAllReports() {
@@ -47,8 +56,13 @@ public class ReportController {
     }
 
     @PutMapping("/admin/updateReport")
-    public ResponseEntity<String> updateReport(@RequestParam Long id, @RequestPart ReportDTO reportDTO, @RequestPart MultipartFile photo) {
-        return ResponseEntity.ok(reportService.updateReport(id, reportDTO, photo));
+    public ResponseEntity<String> updateReport(@RequestParam Long id, @RequestPart("reportDTO") String reportDTOString, @RequestPart("photo") MultipartFile photo) {
+        try {
+            ReportDTO reportDTO = new ObjectMapper().readValue(reportDTOString, ReportDTO.class);
+            return new ResponseEntity<>(reportService.updateReport(id, reportDTO, photo), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Error: " + e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
     }
 
     @DeleteMapping("/admin/deleteReport")

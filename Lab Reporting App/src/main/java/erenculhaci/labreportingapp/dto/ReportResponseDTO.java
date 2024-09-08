@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class ReportResponseDTO {
 
+    private Long id;
     private Long fileNumber;
 
     private String diagnosisTitle;
@@ -19,9 +20,11 @@ public class ReportResponseDTO {
 
     private String reportImageBase64;
 
+    private Long labTechnicianId;
     private String labTechnicianName;
     private String labTechnicianSurname;
 
+    private Long patientId;
     private String patientName;
     private String patientSurname;
 }

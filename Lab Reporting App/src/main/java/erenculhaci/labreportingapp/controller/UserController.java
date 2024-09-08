@@ -5,6 +5,8 @@ import lombok.*;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api")
@@ -15,6 +17,11 @@ public class UserController {
     @PostMapping("/admin/createUser")
     public ResponseEntity<String> createReport(@RequestParam String username, @RequestParam String password, @RequestParam String email, @RequestParam String role) {
         return new ResponseEntity<>(userService.saveUser(username, password, email, role), HttpStatus.CREATED);
+    }
+
+    @GetMapping("/admin/getAllUsers")
+    public ResponseEntity<List<User>> getAllUsers() {
+        return ResponseEntity.ok(userService.getAllUsers());
     }
 
     @PutMapping("/admin/updateUser")
