@@ -2,8 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { api } from '../api/api';
 import Navbar from '../components/Navbar';
 import '../styles/styles.css';
+import { useAuth } from '../AuthContext';
 
 const LabTechnicianPage = () => {
+  const { username: authenticatedUsername } = useAuth();
+  const [authenticatedUserRole, setAuthenticatedUserRole] = useState('');
+
   const [labTechnicians, setLabTechnicians] = useState([]);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -13,7 +17,17 @@ const LabTechnicianPage = () => {
 
   useEffect(() => {
     fetchLabTechnicians();
+    fetchAuthenticatedUserRole(authenticatedUsername);
   }, []);
+
+  const fetchAuthenticatedUserRole = async (username) => {
+    try {
+      const { data: user } = await api.getUser(username);
+      setAuthenticatedUserRole(user.role); 
+    } catch (error) {
+      console.error('Error fetching authenticated user role:', error);
+    }
+  };
 
   const fetchLabTechnicians = async () => {
     try {
@@ -46,8 +60,10 @@ const LabTechnicianPage = () => {
     try {
       await api.createLabTechnician(newLabTechnician);
       setNewLabTechnician({ id: '', firstName: '', lastName: '' });
+      alert('Lab technician created successfully!');
       fetchLabTechnicians();
     } catch (error) {
+      alert('Error creating lab technician.');
       console.error('Error creating lab technician:', error);
     }
   };
@@ -58,9 +74,11 @@ const LabTechnicianPage = () => {
         const updatedData = { firstName: editLabTechnician.firstName, lastName: editLabTechnician.lastName };
         await api.updateLabTechnician(editLabTechnician.id, updatedData);
         setEditLabTechnician(null);
+        alert('Lab technician updated successfully!');
         fetchLabTechnicians();
       }
     } catch (error) {
+      alert('Error updating lab technician.');
       console.error('Error updating lab technician:', error);
     }
   };
@@ -73,8 +91,10 @@ const LabTechnicianPage = () => {
   const handleDelete = async (id) => {
     try {
       await api.deleteLabTechnician(id);
+      alert('Lab technician deleted successfully!');
       fetchLabTechnicians();
     } catch (error) {
+      alert('Error deleting lab technician.');
       console.error('Error deleting lab technician:', error);
     }
   };
@@ -158,12 +178,13 @@ const LabTechnicianPage = () => {
         )}
       </div>
 
-      <div className='button-container'>
-        <button className='button' onClick={fetchLabTechnicians}>Fetch All Technicians</button>
-      </div>
+        {authenticatedUserRole !== 'ROLE_USER' && (
+          <>
+          <div className='button-container'>
+            <button className='button' onClick={fetchLabTechnicians}>Fetch All Technicians</button>
+          </div>
+          </>)}
     </div>
-
-
 
 <h1>Lab Technician List</h1>
       <div className="list-cards-container">
@@ -171,8 +192,10 @@ const LabTechnicianPage = () => {
           <div className="list-card" key={technician.id}>
             <h3>{technician.firstName} {technician.lastName}</h3>
             <p>ID: {technician.id}</p>
-            <button className="button" onClick={() => setEditLabTechnician(technician)}>Edit</button>
-            <button className="button cancel" onClick={() => handleDelete(technician.id)}>Delete</button>
+            {authenticatedUserRole !== 'ROLE_USER' && (<>
+              <button className="button" onClick={() => setEditLabTechnician(technician)}>Edit</button>
+              <button className="button cancel" onClick={() => handleDelete(technician.id)}>Delete</button>
+              </>)}         
           </div>
         ))}
       </div>

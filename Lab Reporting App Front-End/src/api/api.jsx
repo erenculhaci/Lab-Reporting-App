@@ -63,8 +63,11 @@ export const api = {
 
   createUser: (username, password, email, role) => 
     instance.post('/admin/createUser', null, { params: { username, password, email, role } }),
+  createNonAdminUser: (username, password, email) => 
+    instance.post('/createUser', null, { params: { username, password, email } }),
   updateUser: (id, username, password, email, role) => 
     instance.put('/admin/updateUser', null, { params: { id, username, password, email, role } }),
   deleteUser: (id) => instance.delete('/admin/deleteUser', { params: { id } }),
   getAllUsers: () => instance.get('/admin/getAllUsers'),
+  getUser: (username) => instance.get('/getUser', { params: { username } }),
 };

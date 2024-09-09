@@ -17,7 +17,7 @@ public class UserService {
 
     public String saveUser(String username, String password, String email, String role) {
         if (userRepository.findByUsername(username).isPresent()) {
-            return "Username already exists";
+            throw new IllegalArgumentException("Username already exists");
         }
 
         userRepository.save(User.builder()
@@ -27,6 +27,10 @@ public class UserService {
                 .role(Role.valueOf(role))
                 .build());
         return "User saved successfully";
+    }
+
+    public User getUser(String username) {
+        return userRepository.findByUsername(username).orElse(null);
     }
 
     public boolean checkUser(String username, String password) {

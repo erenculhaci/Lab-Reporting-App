@@ -2,8 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { api } from '../api/api';
 import '../styles/styles.css';
 import Navbar from '../components/Navbar';
+import { useAuth } from '../AuthContext';
 
 const ReportPage = () => {
+  const { username: authenticatedUsername } = useAuth();
+  const [authenticatedUserRole, setAuthenticatedUserRole] = useState('');
+
   const [reports, setReports] = useState([]);
   const [fileNumber, setFileNumber] = useState('');
   const [diagnosisTitle, setDiagnosisTitle] = useState('');
@@ -23,7 +27,17 @@ const ReportPage = () => {
     fetchReports();
     fetchLabTechnicians();
     fetchPatients();
+    fetchAuthenticatedUserRole(authenticatedUsername);
   }, []);
+
+  const fetchAuthenticatedUserRole = async (username) => {
+    try {
+      const { data: user } = await api.getUser(username);
+      setAuthenticatedUserRole(user.role); 
+    } catch (error) {
+      console.error('Error fetching authenticated user role:', error);
+    }
+  };
 
   const fetchReports = async () => {
     try {
@@ -68,6 +82,7 @@ const ReportPage = () => {
       fetchReports();
       resetForm();
     } catch (error) {
+      alert('Failed to create report');
       console.error('Error creating report:', error);
     }
   };
@@ -92,6 +107,7 @@ const ReportPage = () => {
         setEditReport(null);
         fetchReports();
       } else {
+        alert ('Failed to update report');
         throw new Error('Failed to update report');
       }
     } catch (error) {
@@ -105,6 +121,7 @@ const ReportPage = () => {
       alert('Report deleted successfully');
       fetchReports();
     } catch (error) {
+      alert('Failed to delete report');
       console.error('Error deleting report:', error);
     }
   };
@@ -247,9 +264,14 @@ const ReportPage = () => {
       </form>
 
 
-      <div className="button-container">
-        <button className="button" onClick={fetchReports}>Fetch All Reports</button>
-      </div>
+      {authenticatedUserRole !== 'ROLE_USER' && (
+        <>
+        <div className="button-container">
+          <button className="button" onClick={fetchReports}>Fetch All Reports</button>
+        </div>
+        </>
+      )}
+
       
       <h2>Reports List</h2>
       <div className="list-cards-container">
@@ -269,8 +291,12 @@ const ReportPage = () => {
                 <img src={`data:image/jpeg;base64,${report.reportImageBase64}`} alt="Report" />
               ) : 'No Image'}
             </div>
-            <button className="button" onClick={() => handleEditReport(report)}>Edit</button>
-            <button className="button cancel" onClick={() => handleDeleteReport(report.id)}>Delete</button>
+            {authenticatedUserRole !== 'ROLE_USER' && (
+              <>
+              <button className="button" onClick={() => handleEditReport(report)}>Edit</button>
+              <button className="button cancel" onClick={() => handleDeleteReport(report.id)}>Delete</button>
+            </>
+          )}
           </div>
         ))}
       </div>

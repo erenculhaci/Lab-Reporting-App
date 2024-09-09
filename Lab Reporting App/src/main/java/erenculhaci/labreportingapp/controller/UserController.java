@@ -15,8 +15,18 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/admin/createUser")
-    public ResponseEntity<String> createReport(@RequestParam String username, @RequestParam String password, @RequestParam String email, @RequestParam String role) {
+    public ResponseEntity<String> createUser(@RequestParam String username, @RequestParam String password, @RequestParam String email, @RequestParam String role) {
         return new ResponseEntity<>(userService.saveUser(username, password, email, role), HttpStatus.CREATED);
+    }
+
+    @PostMapping("/createUser")
+    public ResponseEntity<String> createUser(@RequestParam String username, @RequestParam String password, @RequestParam String email) {
+        return new ResponseEntity<>(userService.saveUser(username, password, email, "ROLE_USER"), HttpStatus.CREATED);
+    }
+
+    @GetMapping("/getUser")
+    public ResponseEntity<User> getUser(@RequestParam String username) {
+        return ResponseEntity.ok(userService.getUser(username));
     }
 
     @GetMapping("/admin/getAllUsers")
@@ -30,12 +40,12 @@ public class UserController {
     }
 
     @PutMapping("/admin/updateUser")
-    public ResponseEntity<String> updateReport(@RequestParam Long id, @RequestParam String username, @RequestParam String password, @RequestParam String email, @RequestParam String role) {
+    public ResponseEntity<String> updateUser(@RequestParam Long id, @RequestParam String username, @RequestParam String password, @RequestParam String email, @RequestParam String role) {
         return ResponseEntity.ok(userService.updateUser(id, username, password, email, role));
     }
 
     @DeleteMapping("/admin/deleteUser")
-    public ResponseEntity<Void> deleteReport(@RequestParam Long id) {
+    public ResponseEntity<Void> deleteUser(@RequestParam Long id) {
         userService.deleteUser(id);
         return ResponseEntity.noContent().build();
     }

@@ -2,8 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { api } from '../api/api';
 import Navbar from '../components/Navbar';
 import '../styles/styles.css';
+import { useAuth } from '../AuthContext';  
 
 const PatientPage = () => {
+  const { username: authenticatedUsername } = useAuth();
+  const [authenticatedUserRole, setAuthenticatedUserRole] = useState('');
+
   const [patients, setPatients] = useState([]);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -13,7 +17,17 @@ const PatientPage = () => {
 
   useEffect(() => {
     fetchPatients();
+    fetchAuthenticatedUserRole(authenticatedUsername);
   }, []);
+
+  const fetchAuthenticatedUserRole = async (username) => {
+    try {
+      const { data: user } = await api.getUser(username);
+      setAuthenticatedUserRole(user.role); 
+    } catch (error) {
+      console.error('Error fetching authenticated user role:', error);
+    }
+  };
 
   const fetchPatients = async () => {
     try {
@@ -46,8 +60,10 @@ const PatientPage = () => {
     try {
       await api.createPatient(newPatient);
       setNewPatient({ id: '', firstName: '', lastName: '' });
+      alert('Patient created successfully!');
       fetchPatients();
     } catch (error) {
+      alert ('Error creating patient.');
       console.error('Error creating patient:', error);
     }
   };
@@ -58,9 +74,11 @@ const PatientPage = () => {
         const updatedData = { firstName: editPatient.firstName, lastName: editPatient.lastName };
         await api.updatePatient(editPatient.id, updatedData);
         setEditPatient(null);
+        alert('Patient updated successfully!');
         fetchPatients();
       }
     } catch (error) {
+      alert('Error updating patient.');
       console.error('Error updating patient:', error);
     }
   };
@@ -73,8 +91,10 @@ const PatientPage = () => {
   const handleDelete = async (id) => {
     try {
       await api.deletePatient(id);
+      alert('Patient deleted successfully!');
       fetchPatients();
     } catch (error) {
+      alert('Error deleting patient.');
       console.error('Error deleting patient:', error);
     }
   };
@@ -158,9 +178,13 @@ const PatientPage = () => {
           )}
         </div>
 
-        <div className='button-container'>
-          <button className='button' onClick={fetchPatients}>Fetch All Patients</button>
-        </div>
+        {authenticatedUserRole !== 'ROLE_USER' && (
+            <>
+            <div className='button-container'>
+              <button className='button' onClick={fetchPatients}>Fetch All Patients</button>
+            </div>
+            </>)}
+
       </div>
 
       <h1>Patient List</h1>
@@ -169,8 +193,13 @@ const PatientPage = () => {
           <div className="list-card" key={patient.id}>
             <h3>{patient.firstName} {patient.lastName}</h3>
             <p>ID: {patient.id}</p>
-            <button className="button" onClick={() => setEditPatient(patient)}>Edit</button>
-            <button className="button cancel" onClick={() => handleDelete(patient.id)}>Delete</button>
+
+            {authenticatedUserRole !== 'ROLE_USER' && (
+            <>
+              <button className="button" onClick={() => setEditPatient(patient)}>Edit</button>
+              <button className="button cancel" onClick={() => handleDelete(patient.id)}>Delete</button>
+            </>)}
+
           </div>
         ))}
       </div>
