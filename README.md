@@ -137,6 +137,7 @@ The project includes two default users:
   - Search reports by Lab Technician name.
   - Get all the reports' information.
   - Reports are always ordered by their dates on view page.
+  - NOTE: When creating reports, in the picture uploading section you need to upload very small-sized pictures. (under 50-100KB)
 
 - **Lab Technicians**:
   - Perform CRUD operations on lab technicians.
