@@ -148,7 +148,9 @@ The project includes two default users:
   - Create update or delete users.
   - Admins have access to create admin accounts but users do not.
   - Admins can update, delete or fetch the users but users are only able to create users.
-
+    
+- **Style**:
+  - Added some cool design for the pages as well as the "DARK MODE" button to turn the page into dark mode. 
 ---
 
 If you have any questions or run into issues, please open an issue on [GitHub](https://github.com/erenculhaci/Lab-Reporting-App/issues).
