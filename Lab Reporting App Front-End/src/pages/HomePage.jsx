@@ -2,8 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import '../styles/HomePage.css'; 
+import { useAuth } from '../AuthContext';
 
 const HomePage = () => {
+  const { username } = useAuth();
+
   return (
     <div className="home-page">
       <Navbar />
@@ -24,6 +27,10 @@ const HomePage = () => {
           </li>
         </ul>
       </nav>
+
+      <h3>You are signed in as: {username}</h3> {/* Display the username */}
+      
+      <Link to="/login" className="logout-link">Logout</Link>
     </div>
   );
 };

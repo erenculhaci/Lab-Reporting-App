@@ -4,12 +4,16 @@ const API_URL = 'http://localhost:8080/api';
 
 const instance = axios.create({
   baseURL: API_URL,
-  headers: {
-    'Authorization': 'Basic ' + btoa('admin:admin123'),
-  }
 });
 
+// Function to set authorization header
+export const setAuthorizationHeader = (username, password) => {
+  const encodedCredentials = btoa(`${username}:${password}`);
+  instance.defaults.headers.common['Authorization'] = `Basic ${encodedCredentials}`;
+};
+
 export const api = {
+  instance,
   createLabTechnician: (data) => instance.post('/createLabTechnician', data),
   getAllLabTechnicians: () => instance.get('/admin/getAllLabTechnicians'),
   searchLabTechnicianByName: (firstName, lastName) => 

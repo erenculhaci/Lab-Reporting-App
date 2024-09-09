@@ -1,29 +1,69 @@
-/* src/pages/HomePage.css */
 .home-page {
-  padding-top: 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh; /* Ensures the content takes up at least the full height of the viewport */
+  background-color: #f9f9f9;
+  color: #333;
   text-align: center;
+  font-family: 'Arial', sans-serif;
 }
 
 .home-page h1 {
   margin-bottom: 2rem;
+  font-size: 2.5rem;
+  color: #222;
 }
 
 .home-page nav ul {
   list-style: none;
   padding: 0;
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
 }
 
 .home-page nav ul li {
   display: inline;
-  margin: 0 1rem;
 }
 
 .home-page nav ul li a {
   text-decoration: none;
   color: #007bff;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: background-color 0.3s, color 0.3s;
 }
 
 .home-page nav ul li a:hover {
-  text-decoration: underline;
+  background-color: #007bff;
+  color: #fff;
+  text-decoration: none;
+}
+
+.home-page h3 {
+  margin-top: 1rem;
+  font-size: 1.1rem;
+  color: #555;
+}
+
+.home-page .logout-link {
+  display: inline-block;
+  margin-top: 1rem;
+  text-decoration: none;
+  color: #dc3545;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border: 1px solid #dc3545;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.home-page .logout-link:hover {
+  background-color: #dc3545;
+  color: #fff;
+  text-decoration: none;
 }

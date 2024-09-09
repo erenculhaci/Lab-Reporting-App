@@ -16,6 +16,10 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
 
     public String saveUser(String username, String password, String email, String role) {
+        if (userRepository.findByUsername(username).isPresent()) {
+            return "Username already exists";
+        }
+
         userRepository.save(User.builder()
                 .username(username)
                 .password(passwordEncoder.encode(password))
@@ -23,6 +27,11 @@ public class UserService {
                 .role(Role.valueOf(role))
                 .build());
         return "User saved successfully";
+    }
+
+    public boolean checkUser(String username, String password) {
+        User user = userRepository.findByUsername(username).orElse(null);
+        return user != null && passwordEncoder.matches(password, user.getPassword());
     }
 
     public List<User> getAllUsers() {

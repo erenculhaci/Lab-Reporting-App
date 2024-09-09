@@ -24,6 +24,11 @@ public class UserController {
         return ResponseEntity.ok(userService.getAllUsers());
     }
 
+    @GetMapping("/checkUser")
+    public ResponseEntity<Boolean> checkUser(@RequestParam String username, @RequestParam String password) {
+        return ResponseEntity.ok(userService.checkUser(username, password));
+    }
+
     @PutMapping("/admin/updateUser")
     public ResponseEntity<String> updateReport(@RequestParam Long id, @RequestParam String username, @RequestParam String password, @RequestParam String email, @RequestParam String role) {
         return ResponseEntity.ok(userService.updateUser(id, username, password, email, role));

@@ -28,6 +28,15 @@ public class AppConfig {
                         .build();
                 userRepository.save(admin);
             }
+            if (userRepository.findByUsername("user").isEmpty()) {
+                User user = User.builder()
+                        .username("user")
+                        .password(passwordEncoder.encode("user123"))
+                        .email("user@example.com")
+                        .role(Role.ROLE_USER)
+                        .build();
+                userRepository.save(user);
+            }
         };
     }
 }

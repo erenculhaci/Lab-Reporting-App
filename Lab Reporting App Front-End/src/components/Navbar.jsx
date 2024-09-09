@@ -20,6 +20,9 @@ const Navbar = () => {
           <li className="navbar-item">
             <Link to="/users" className="navbar-link">Users</Link>
           </li>
+          <li className='navbar-item'>
+            <Link to="/login" className="navbar-link">Logout</Link>
+          </li>
         </ul>
       </div>
     </nav>
