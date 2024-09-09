@@ -1,12 +1,13 @@
 .navbar {
     background-color: #007bff;
     color: white;
-    padding: 1rem 0;
+    padding: 2.3rem;
     position: fixed;
     width: 100%;
     top: 0;
     left: 0;
     z-index: 1000;
+    height: 1rem;
   }
   
   .navbar-container {
@@ -19,7 +20,7 @@
   }
   
   .navbar-logo {
-    font-size: 1.5rem;
+    font-size: 1.7rem;
     font-weight: bold;
     color: white;
     text-decoration: none;
@@ -39,17 +40,56 @@
   .navbar-link {
     color: white;
     text-decoration: none;
-    font-size: 1rem;
+    font-size: 1.2rem;
     transition: color 0.3s;
+    padding: 0.5rem 1rem;
   }
   
   .navbar-link:hover {
     color: #ffdd57; 
+    background-color: #1988ff;
+    border-radius: 4px;
   }
   
+  .navbar-darkmode-btn {
+    background-color: transparent;
+    border: none;
+  }
+
   @media (max-width: 768px) {
     .navbar-menu {
       display: none;
     }
   }
-  
+
+.dark-mode .navbar {
+  background-color: #1f1f1f;  
+  color: #e0e0e0;  
+}
+
+.dark-mode .navbar-logo {
+  color: #f5f5f5;  
+}
+
+.dark-mode .navbar-link {
+  color: #e0e0e0;  
+  transition: color 0.3s, background-color 0.3s;  
+}
+
+.dark-mode .navbar-link:hover {
+  color: #ffdd57; 
+  background-color: #333;  
+  border-radius: 4px;  
+}
+
+.dark-mode .navbar-darkmode-btn {
+  background-color: transparent;
+  border: none;
+  transition: color 0.3s, background-color 0.3s;  
+}
+
+@media (max-width: 768px) {
+  .dark-mode .navbar-menu {
+    display: none;  
+  }
+}

@@ -1,8 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/Navbar.css';
 
 const Navbar = () => {
+  const [darkMode, setDarkMode] = useState(false);
+
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+    if (darkMode) {
+      document.body.classList.remove('dark-mode');
+    } else {
+      document.body.classList.add('dark-mode');
+    }
+  };
+
   return (
     <nav className="navbar">
       <div className="navbar-container">
@@ -20,8 +31,13 @@ const Navbar = () => {
           <li className="navbar-item">
             <Link to="/users" className="navbar-link">Users</Link>
           </li>
-          <li className='navbar-item'>
+          <li className="navbar-item">
             <Link to="/login" className="navbar-link">Logout</Link>
+          </li>
+          <li className="navbar-item">
+            <button onClick={toggleDarkMode} className="navbar-darkmode-btn">
+              {darkMode ? '🌞' : '🌙'}
+            </button>
           </li>
         </ul>
       </div>

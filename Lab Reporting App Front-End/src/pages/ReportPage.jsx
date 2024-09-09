@@ -175,7 +175,7 @@ const ReportPage = () => {
   return (
     <div className="page-container">
       <Navbar />
-
+      <h1>Reports</h1>
       <div className="search-cards">
 
         <div className="search-card">
@@ -273,7 +273,7 @@ const ReportPage = () => {
       )}
 
       
-      <h2>Reports List</h2>
+      <h1>Reports List</h1>
       <div className="list-cards-container">
         {reports.map(report => (
           <div key={report.id} className="list-card">

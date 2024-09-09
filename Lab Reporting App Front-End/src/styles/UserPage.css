@@ -1,0 +1,162 @@
+.page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #f9f9f9;
+  color: #333;
+  text-align: center;
+  font-family: 'Arial', sans-serif;
+}
+
+.page-container h1 {
+  margin-bottom: 2rem;
+  font-size: 2.5rem;
+  color: #222;
+}
+
+.page-container .form-container {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 4rem;
+  width: 100%;
+  max-width: 800px;
+  margin-bottom: 2rem;
+}
+
+.page-container .form-container h2 {
+  margin-bottom: 1.5rem;
+  font-size: 1.8rem;
+  color: #333;
+}
+
+.page-container .form-group {
+  margin-bottom: 1rem;
+}
+
+.page-container .form-input,
+.page-container .form-select {
+  width: calc(100% - 1.6rem);
+  padding: 1.3rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  box-sizing: border-box; 
+}
+
+.page-container .button-container {
+  margin-top: 1rem;
+}
+
+.page-container .button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin: 0 0.5rem;
+}
+
+.page-container .button:hover {
+  background-color: #0056b3;
+}
+
+.page-container .button.cancel {
+  background-color: #dc3545;
+}
+
+.page-container .button.cancel:hover {
+  background-color: #c82333;
+}
+
+.page-container .list-cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.page-container .list-card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1rem;
+  width: 300px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: left;
+}
+
+.page-container .list-card h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.page-container .list-card p {
+  margin: 0 0 1rem;
+  font-size: 1rem;
+  color: #666;
+}
+
+/* Dark Mode Styles */
+.dark-mode .page-container {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
+.dark-mode .page-container h1 {
+  color: #f5f5f5;
+}
+
+.dark-mode .page-container .form-container {
+  background-color: #1f1f1f;
+  border: 1px solid #333;
+}
+
+.dark-mode .page-container .form-container h2 {
+  color: #e0e0e0;
+}
+
+.dark-mode .page-container .form-input,
+.dark-mode .page-container .form-select {
+  background-color: #333;
+  color: #e0e0e0;
+  border: 1px solid #555;
+}
+
+.dark-mode .page-container .button {
+  background-color: #ffdd57;
+  color: #1f1f1f;
+}
+
+.dark-mode .page-container .button:hover {
+  background-color: #e0e0e0;
+  color: #1f1f1f;
+}
+
+.dark-mode .page-container .button.cancel {
+  background-color: #ff6b6b;
+}
+
+.dark-mode .page-container .button.cancel:hover {
+  background-color: #ff6b6b;
+  color: #121212;
+}
+
+.dark-mode .page-container .list-card {
+  background-color: #1f1f1f;
+  border: 1px solid #333;
+}
+
+.dark-mode .page-container .list-card h3 {
+  color: #e0e0e0;
+}
+
+.dark-mode .page-container .list-card p {
+  color: #b0b0b0;
+}

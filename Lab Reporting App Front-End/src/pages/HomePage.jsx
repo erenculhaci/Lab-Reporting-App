@@ -11,7 +11,7 @@ const HomePage = () => {
     <div className="home-page">
       <Navbar />
       <h1>Welcome to the Laboratory Reporting System</h1>
-      <nav>
+      <nav className="home-page-nav">
         <ul>
           <li>
             <Link to="/lab-technicians">Lab Technicians</Link>
@@ -28,7 +28,8 @@ const HomePage = () => {
         </ul>
       </nav>
 
-      <h3>You are signed in as: {username}</h3> {/* Display the username */}
+
+      <h3>You are signed in as: {username}</h3>
       
       <Link to="/login" className="logout-link">Logout</Link>
     </div>

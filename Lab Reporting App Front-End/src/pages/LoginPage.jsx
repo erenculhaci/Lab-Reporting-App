@@ -28,7 +28,7 @@ const LoginPage = () => {
 
       if (response.data) {
         setAuthorizationHeader(username, password);
-        login(username); // Pass username to update auth context
+        login(username); 
         navigate('/');
       } else {
         setError('Invalid username or password');
