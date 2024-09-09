@@ -2,7 +2,9 @@
 
 This project is a Java + Spring web application designed for lab reporting. The system allows users to manage various aspects of lab reports through a front-end interface built with React. It supports different entities such as reports, patients, and lab technicians.
 
-![2024-09-09 19-52-08](https://github.com/user-attachments/assets/adc7a698-2168-4e35-aac9-c0353cd5f156)
+
+![reportapp](https://github.com/user-attachments/assets/2e3d7505-0466-431f-bc80-e2c6e2fb9966)
+
 
 ## Requirements
 
